@@ -1,0 +1,58 @@
+.Modal {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.Modal .image {
+  width: 100%;
+}
+
+.modal_title h1 {
+  font-size: 20px;
+  color: #222;
+}
+.modal_title div {
+  font-size: 16px;
+  color: #777;
+}
+.modal_image {
+  overflow-y: scroll;
+  height: 100%;
+  margin-top: 20px;
+  position: relative;
+}
+.modal_image img {
+  height: auto !important;
+  position: static !important;
+}
+
+.scroll_wrapper {
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+.scroll_wrapper .scroll {
+  position: absolute;
+  right: 10px;
+  top: 40px;
+  color: #5fe4b6;
+  transform: rotate(90deg);
+  transform-origin: bottom;
+  font-size: 14px;
+  transition: all 0.3s ease-in-out;
+}
+.scroll_wrapper svg {
+  fill: #5fe4b6;
+  position: absolute;
+  right: 26px;
+  top: 104px;
+  width: 14px;
+}
+.scroll_wrapper:hover .scroll,
+.scroll_wrapper:active .scroll {
+  color: #fff;
+}
+.scroll_wrapper:hover svg,
+.scroll_wrapper:active svg {
+  fill: #fff;
+}

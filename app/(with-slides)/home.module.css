@@ -1,0 +1,33 @@
+.logo_wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.company {
+  color: #777;
+  font-size: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  position: absolute;
+  bottom: 100px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+}
+
+.logo {
+  max-width: 70%;
+  position: static !important;
+}
+
+@media (min-width: 750px) {
+  .logo {
+    max-width: 80%;
+  }
+}
+@media (min-width: 1200px) {
+  .logo {
+    max-width: 90%;
+  }
+}

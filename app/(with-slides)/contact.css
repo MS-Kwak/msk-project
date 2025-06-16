@@ -1,0 +1,40 @@
+.contact__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+}
+
+.MuiStack-root {
+  align-items: center;
+  padding-top: 30px;
+}
+
+.MuiAlert-root {
+  background-color: rgb(253 237 237 / 70%);
+  display: flex;
+  align-items: center;
+  height: 50px !important;
+  width: 50%;
+  z-index: 1;
+}
+.MuiAlert-root.MuiAlert-colorSuccess {
+  background-color: rgb(237 253 237 / 70%);
+}
+
+.MuiAlert-action {
+  padding: 0 0 0 20px !important;
+  margin-right: 0 !important;
+}
+
+.MuiButtonBase-root.MuiIconButton-root {
+  background-color: transparent;
+  margin-top: 0;
+  padding: 0;
+}
+
+.confirm__button {
+  background: transparent;
+  color: #3e833f;
+}

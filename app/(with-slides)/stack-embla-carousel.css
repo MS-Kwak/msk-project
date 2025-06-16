@@ -1,0 +1,33 @@
+/* ReactModal */
+.ReactModalPortal .ReactModal__Overlay {
+  background: rgb(0 0 0 / 60%) !important;
+  z-index: 1;
+}
+.ReactModalPortal .ReactModal__Content {
+  inset: 0 !important;
+  border: none !important;
+  border-radius: 5px !important;
+  padding: 20px !important;
+  width: 90%;
+  display: flex;
+  align-self: center;
+  justify-self: center;
+  justify-content: flex-start;
+  overflow: hidden !important;
+  height: calc(100vh - 500px);
+}
+
+@media (min-width: 750px) {
+  .ReactModalPortal .ReactModal__Content {
+    padding: 30px !important;
+    width: 80%;
+    height: calc(100vh - 200px);
+  }
+}
+@media (min-width: 1200px) {
+  .ReactModalPortal .ReactModal__Content {
+    padding: 30px !important;
+    width: 70%;
+    height: calc(100vh - 200px);
+  }
+}

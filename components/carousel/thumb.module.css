@@ -1,0 +1,7 @@
+.embla__thumbs_slide svg:hover,
+.embla__thumbs_slide svg:active {
+  fill: #5fe4b6;
+}
+.embla__thumbs_slide.embla__thumbs_slide_selected svg {
+  fill: #5fe4b6;
+}

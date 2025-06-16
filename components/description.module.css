@@ -1,0 +1,24 @@
+.embla__slide_description {
+  position: absolute;
+  right: 3%;
+  top: 3%;
+  font-size: 14px;
+  line-height: 1;
+  color: #ddd;
+}
+.iconRed {
+  margin: -5px 5px 0 0;
+  width: 20px;
+  height: 20px;
+}
+
+@media (min-width: 500px) {
+  .embla__slide_description {
+    right: 5%;
+    top: 5%;
+    font-size: 16px;
+  }
+  .iconRed {
+    margin: -5px 7px 0 0;
+  }
+}

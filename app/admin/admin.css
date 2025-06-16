@@ -1,0 +1,11 @@
+.MuiPaper-root {
+  width: 100%;
+  height: 100vh;
+  margin: 30px;
+}
+
+.MuiBox-root {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

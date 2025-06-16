@@ -1,0 +1,58 @@
+.EmblaCarousel {
+  max-width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+}
+.embla__viewport {
+  overflow: hidden;
+  width: 100%;
+  height: 100vh;
+}
+.embla__container {
+  display: flex;
+}
+.embla__controls {
+  display: flex;
+  justify-content: end;
+  gap: 1.2rem;
+  align-items: center;
+  margin-right: 5%;
+}
+.embla__controls_wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 5%;
+  margin-bottom: 3%;
+}
+.embla__thumbs_viewport {
+  background: rgb(255, 255, 255, 0.1);
+  border-radius: 40px;
+  display: none;
+  padding: 10px 20px;
+}
+@media (min-width: 500px) {
+  .embla__controls_wrapper {
+    justify-content: space-between;
+  }
+  .embla__thumbs_viewport {
+    display: flex;
+  }
+}
+@media (min-width: 1200px) {
+  .embla__controls_wrapper {
+    justify-content: space-between;
+  }
+  .embla__thumbs_viewport {
+    display: flex;
+  }
+}
+
+.embla__thumbs_container {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}

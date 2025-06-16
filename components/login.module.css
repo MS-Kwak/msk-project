@@ -1,0 +1,19 @@
+.login {
+  position: absolute;
+  left: 3%;
+  top: 3%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.login button svg {
+  width: 20px;
+  height: 20px;
+}
+
+@media (min-width: 500px) {
+  .login {
+    left: 5%;
+    top: 5%;
+  }
+}

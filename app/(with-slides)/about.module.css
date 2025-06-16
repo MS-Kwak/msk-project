@@ -1,0 +1,123 @@
+#KR {
+  font-family: 'NanumSquare';
+  font-size: 14px;
+}
+
+.conetent_box {
+  display: flex;
+  gap: 2%;
+  width: 100%;
+  justify-content: center;
+}
+.conetent_box.conetent_box_1 {
+  flex-direction: column;
+  align-items: center;
+}
+.conetent_box.conetent_box_1 .image_box {
+  min-height: 180px;
+  padding: 10px;
+}
+.conetent_box.conetent_box_1 .image_box h1 {
+  font-size: 16px;
+}
+.conetent_box.conetent_box_1 .image_box div {
+  font-size: 13px;
+}
+.image_box {
+  background-color: rgb(95 228 182 / 20%);
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  color: #fff;
+  text-align: center;
+  border: 1px solid transparent;
+  transition: all 0.3s ease-in-out;
+  min-height: 200px;
+  width: 70%;
+  word-break: break-all;
+  height: 100%;
+}
+.conetent_box.conetent_box_1 .image_box #KR {
+  font-size: 13px;
+}
+.conetent_box.conetent_box_1 .image_box svg {
+  margin-bottom: 10px;
+}
+.image_box h1 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+.image_box div {
+  font-size: 14px;
+  color: #aaa;
+  margin-bottom: 10px;
+}
+.image_box #KR {
+  color: #ccc;
+  line-height: 1.8;
+}
+.conetent_box .image_box svg {
+  width: 24px;
+  height: 24px;
+  fill: #5fe4b6;
+  margin-bottom: 20px;
+}
+@media (min-width: 750px) {
+  .image_box {
+    min-height: 260px;
+    width: 30%;
+  }
+  .conetent_box.conetent_box_1 {
+    flex-direction: row;
+  }
+  .conetent_box.conetent_box_1 .image_box {
+    min-height: 200px;
+    padding: 20px;
+  }
+  .conetent_box.conetent_box_1 .image_box h1 {
+    font-size: 18px;
+  }
+  .conetent_box.conetent_box_1 .image_box div {
+    font-size: 14px;
+  }
+  .conetent_box.conetent_box_1 .image_box #KR {
+    font-size: 14px;
+  }
+  .conetent_box.conetent_box_1 .image_box svg {
+    margin-bottom: 20px;
+  }
+}
+@media (min-width: 1200px) {
+  .image_box {
+    min-height: 260px;
+    width: 26%;
+  }
+  .conetent_box.conetent_box_1 {
+    flex-direction: row;
+  }
+  .conetent_box.conetent_box_1 .image_box {
+    min-height: 200px;
+    padding: 20px;
+  }
+  .conetent_box.conetent_box_1 .image_box h1 {
+    font-size: 18px;
+  }
+  .conetent_box.conetent_box_1 .image_box div {
+    font-size: 14px;
+  }
+  .conetent_box.conetent_box_1 .image_box #KR {
+    font-size: 14px;
+  }
+  .conetent_box.conetent_box_1 .image_box svg {
+    margin-bottom: 20px;
+  }
+}
+
+.image_box:hover,
+.image_box:active {
+  background-color: #222;
+  border-color: #5fe4b6;
+}

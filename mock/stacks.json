@@ -1,0 +1,145 @@
+[
+  {
+    "modalId": 1,
+    "thumbImage": "/project-chatbot-thumb.png",
+    "title": "AI CHATBOT",
+    "url": "https://chat.lge.co.kr",
+    "props": {
+      "modalTitle": "LGE.COM Chatbot",
+      "modalDescription": "AI CHATBOT FRONTEND DEVELOP SM PROJECT",
+      "modalImage": "/project-chatbot.png"
+    }
+  },
+  {
+    "modalId": 2,
+    "thumbImage": "/project-instagram-thumb.png",
+    "title": "REALTIME CHAT STIE",
+    "url": "https://instagram-supabase-two.vercel.app",
+    "props": {
+      "modalTitle": "Inflearngram Chat website",
+      "modalDescription": "FULLSTACK SUPABASE DEVELOP PROJECT",
+      "modalImage": "/project-instagram.png"
+    }
+  },
+  {
+    "modalId": 3,
+    "thumbImage": "/project-emotion-diary-thumb.png",
+    "title": "PERSONAL STIE",
+    "url": "https://emotion-diary-psi-one.vercel.app",
+    "props": {
+      "modalTitle": "Emotion diary website",
+      "modalDescription": "PERSOMAL WEB FRONTEND DEVELOP PROJECT",
+      "modalImage": "/project-emotion-diary.png"
+    }
+  },
+  {
+    "modalId": 4,
+    "thumbImage": "/project-plenus-thumb.jpg",
+    "title": "RESPONSIVE WEB",
+    "url": "http://www.plenus.co.kr",
+    "props": {
+      "modalTitle": "Plenus website",
+      "modalDescription": "RESPONSIVE WEB FRONTEND DEVELOP SI PROJECT",
+      "modalImage": "/project-plenus.png"
+    }
+  },
+  {
+    "modalId": 5,
+    "thumbImage": "/project-hk-weborder-thumb.png",
+    "title": "B2B WEBSTIE",
+    "url": "",
+    "props": {
+      "modalTitle": "Hankook tire B2B website",
+      "modalDescription": "WEB FRONTEND DEVELOP SI PROJECT",
+      "modalImage": "/project-hk-weborder.png"
+    }
+  },
+  {
+    "modalId": 6,
+    "thumbImage": "/project-retrodyne-thumb.jpg",
+    "title": "RESPONSIVE WEB",
+    "url": "https://www.retrodyne.kr",
+    "props": {
+      "modalTitle": "Retrodyne shopping mall website",
+      "modalDescription": "RESPONSIVE WEB FRONTEND DEVELOP SI PROJECT",
+      "modalImage": "/project-retrodyne.png"
+    }
+  },
+  {
+    "modalId": 7,
+    "thumbImage": "/project-hk-smartguide-thumb.jpg",
+    "title": "TABLET PC",
+    "url": "",
+    "props": {
+      "modalTitle": "Hankook tire smart guide app",
+      "modalDescription": "TABLET PC FLATFORM SI PROJECT",
+      "modalImage": "/project-hk-smartguide.jpg"
+    }
+  },
+  {
+    "modalId": 8,
+    "thumbImage": "/project-ezmarket-thumb.jpg",
+    "title": "WEBSTIE",
+    "url": "https://ezmarket-minseokwaks-projects.vercel.app",
+    "props": {
+      "modalTitle": "Ezmarket shopping mall website",
+      "modalDescription": "WEB FRONTEND DEVELOP SI PROJECT",
+      "modalImage": "/project-ezmarket.jpg"
+    }
+  },
+  {
+    "modalId": 9,
+    "thumbImage": "/project-fundu-thumb.jpg",
+    "title": "RESPONSIVE WEB",
+    "url": "",
+    "props": {
+      "modalTitle": "Fundu website",
+      "modalDescription": "RESPONSIVE WEB FRONTEND DEVELOP SI PROJECT",
+      "modalImage": "/project-fundu.png"
+    }
+  },
+  {
+    "modalId": 10,
+    "thumbImage": "/project-jejoplus-thumb.jpg",
+    "title": "WEBSTIE",
+    "url": "https://jplus-nu.vercel.app",
+    "props": {
+      "modalTitle": "Jejoplus website",
+      "modalDescription": "MANUFACTUER NETWORK SYSTEM WEB FRONTEND DEVELOP SI PROJECT",
+      "modalImage": "/project-jejoplus.png"
+    }
+  },
+  {
+    "modalId": 11,
+    "thumbImage": "/project-beesket-thumb.jpg",
+    "title": "MOBILE APP",
+    "url": "",
+    "props": {
+      "modalTitle": "Beesket mobile app",
+      "modalDescription": "MOBILE APP DEVELOP SI PROJECT",
+      "modalImage": "/project-beesket.png"
+    }
+  },
+  {
+    "modalId": 12,
+    "thumbImage": "/project-ceedo-korea-thumb.png",
+    "title": "RESPONSIVE WEB",
+    "url": "",
+    "props": {
+      "modalTitle": "Ceedo Korea website",
+      "modalDescription": "RESPONSIVE WEB FRONTEND DEVELOP SI PROJECT",
+      "modalImage": "/project-ceedo-korea.png"
+    }
+  },
+  {
+    "modalId": 13,
+    "thumbImage": "/project-cookingmath-thumb.jpg",
+    "title": "MOBILE APP",
+    "url": "",
+    "props": {
+      "modalTitle": "Cooking math mobile app",
+      "modalDescription": "MOBILE APP DEVELOP SI PROJECT",
+      "modalImage": "/project-cookingmath.png"
+    }
+  }
+]

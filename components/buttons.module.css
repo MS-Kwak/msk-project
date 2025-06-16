@@ -1,0 +1,86 @@
+.Buttons {
+  cursor: pointer;
+  background: transparent;
+  transition: all 0.3s ease-in-out;
+}
+.Buttons svg {
+  width: 24px;
+  height: 24px;
+  transition: all 0.3s ease-in-out;
+}
+
+.Buttons svg:hover,
+.Buttons svg:active {
+  fill: #ff645b;
+}
+.Buttons.Buttons_KAKAO svg:hover,
+.Buttons.Buttons_KAKAO svg:active {
+  fill: #fae100;
+}
+
+.Buttons_WHITE svg {
+  fill: #fff;
+}
+.Buttons_RED svg {
+  fill: #ff645b;
+}
+.Buttons_GREEN svg {
+  fill: #5fe4b6;
+}
+.Buttons_GREY svg {
+  fill: #aaa;
+}
+.Buttons_DARKGREY svg {
+  fill: #777;
+}
+.Buttons_DARK svg {
+  fill: #222;
+}
+.Buttons_yellow svg {
+  fill: #fae100;
+}
+
+.Buttons_LINE {
+  color: #5fe4b6;
+  border: 1px solid #5fe4b6;
+  width: 45%;
+  border-radius: 5px;
+}
+.Buttons_FILL {
+  background: #5fe4b6;
+  color: #304940;
+  width: 45%;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid transparent;
+}
+.Buttons_LINE:hover,
+.Buttons_LINE:active,
+.Buttons_FILL:hover,
+.Buttons_FILL:active {
+  background: #fff;
+  border-color: #fff;
+  color: #304940;
+  padding: 10px;
+}
+.Buttons_FILL_DISABLED {
+  background: rgb(255 255 255 / 30%);
+  color: #304940;
+  width: 45%;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid transparent;
+}
+
+.Buttons_LOGIN {
+  background: rgb(255 255 255 / 30%);
+  padding: 10px;
+  color: #222;
+  width: 120px;
+}
+
+.Buttons_FILL.Buttons_OAUTH {
+  color: #222;
+  max-width: 120px;
+  margin-top: 30px;
+}

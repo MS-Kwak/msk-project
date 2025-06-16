@@ -1,0 +1,38 @@
+.embla__button {
+  background-color: transparent;
+  touch-action: manipulation;
+  cursor: pointer;
+  width: 3.6rem;
+  height: 3.6rem;
+  z-index: 1;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.embla__button.embla__button_prev {
+  fill: #777;
+  border-radius: 100%;
+  width: 30px;
+  height: 30px;
+  background-size: contain;
+  transition: all 0.3s ease-in-out;
+}
+.embla__button.embla__button_prev:hover,
+.embla__button.embla__button_prev:active {
+  background-color: #777;
+  fill: #222;
+}
+
+.embla__button.embla__button_next {
+  fill: #777;
+  width: 30px;
+  height: 30px;
+  background-size: contain;
+  transition: all 0.3s ease-in-out;
+}
+.embla__button.embla__button_next:hover,
+.embla__button.embla__button_next:active {
+  background-color: #777;
+  fill: #222;
+}

@@ -1,0 +1,30 @@
+.stack_embla_button {
+  background-color: #5fe4b6;
+  touch-action: manipulation;
+  width: 2rem;
+  height: 2rem;
+  z-index: 1;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.stack_embla_button_prev {
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  transform: translateY(calc(50% - 40px));
+}
+.stack_embla_button_next {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(calc(50% - 40px));
+}
+.stack_embla_button:disabled {
+  background-color: #304940;
+}
+
+.stack_embla_button_svg {
+  fill: #222;
+}
