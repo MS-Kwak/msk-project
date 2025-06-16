@@ -1,7 +1,7 @@
 import { createServerSupabaseClient } from '@/utils/supabase/server';
 import AuthProvider from '@/config/AuthProvider';
 import AdminPage from '@/app/admin/page';
-import Auth from '@/components/Auth';
+import SignIn from '@/components/auth/signin';
 
 export default async function LoginPage() {
   const supabase = await createServerSupabaseClient();
@@ -14,7 +14,7 @@ export default async function LoginPage() {
 
   return (
     <AuthProvider accessToken={session?.access_token}>
-      {session?.user ? <AdminPage /> : <Auth />}
+      {session?.user ? <AdminPage /> : <SignIn />}
     </AuthProvider>
   );
 }

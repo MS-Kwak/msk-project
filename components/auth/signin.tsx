@@ -1,4 +1,4 @@
-'use client;';
+'use client';
 
 import { createBrowserSupabaseClient } from '@/utils/supabase/client';
 import { Input } from '@material-tailwind/react';
