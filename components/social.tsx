@@ -3,6 +3,13 @@ import useSocialImage from '@/hooks/useSocialImage';
 import Buttons from '@/components/buttons';
 import style from './social.module.css';
 
+// 글로벌 선언 또는 타입 선언 필요
+declare global {
+  interface Window {
+    Kakao?: any; // 또는 좀 더 구체적 타입 선언
+  }
+}
+
 const Social = () => {
   const API_KAKAO_ADMIN_KEY = process.env.NEXT_PUBLIC_KAKAO_ADMIN_KEY;
   const KAKAO_PUBLIC_KEY = '_xfqyBn';
@@ -59,6 +66,7 @@ const Social = () => {
       <Buttons
         text={useSocialImage('github')}
         type={'WHITE'}
+        type2={''}
         onClick={() => OpenWindow('https://github.com/MS-Kwak')}
       />
       <Buttons

@@ -4,7 +4,6 @@ import Buttons from '@/components/buttons';
 import { useContext, useState, useEffect } from 'react';
 import { SlideIndexStateContext } from '@/components/carousel/slides';
 import Modal from '@/components/modal';
-import stacksData from '@/mock/stacks.json';
 import {
   DotButton,
   useDotButton,
@@ -15,15 +14,43 @@ import {
   usePrevNextButtons,
 } from './stack-embla-carousel-arrow-buttons';
 import useEmblaCarousel from 'embla-carousel-react';
-import Image from 'next/image';
+import { EmblaOptionsType } from 'embla-carousel';
 import './stack-embla-carousel.css';
+import Image from 'next/image';
+import { useQuery } from '@tanstack/react-query';
+import { getStacks } from '@/actions/stack.action';
 
-const OPTIONS = { align: 'start', watchDrag: false };
+const OPTIONS: EmblaOptionsType = {
+  align: 'start',
+  watchDrag: false,
+};
+type Stacks = {
+  id: number;
+  thumb_image: string;
+  title: string;
+  url: string;
+  props__modal_title: string;
+  props__modal_description: string;
+  props__modal_image: string;
+};
 
 const StackEmblaCarousel = () => {
   const slideIndex = useContext(SlideIndexStateContext);
   const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [modalContent, setModalContent] = useState(stacksData);
+  const [modalContent, setModalContent] = useState(null);
+
+  const stacksQuery = useQuery({
+    queryKey: ['stack'],
+    queryFn: () => getStacks(),
+  });
+
+  useEffect(() => {
+    if (stacksQuery.data) {
+      setModalContent(stacksQuery.data);
+    }
+  }, [stacksQuery.data]);
+
+  const stacksQueryData = stacksQuery.data as Stacks[];
 
   const [emblaRef, emblaApi] = useEmblaCarousel(OPTIONS);
 
@@ -57,38 +84,42 @@ const StackEmblaCarousel = () => {
     >
       <div className={style.stack_embla_viewport} ref={emblaRef}>
         <div className={style.stack_embla_container}>
-          {stacksData.map((item, index) => (
-            <div
-              key={item.modalId}
-              className={style.stack_embla_slide}
-            >
-              <div className={style.image_box} key={item.modalId}>
-                <div className={style.project_image}>
-                  <Image
-                    src={item.thumbImage}
-                    alt="thumbImage"
-                    fill
-                  />
-                </div>
-                <h1>{item.title}</h1>
-                <div className={style.project_button}>
-                  <Buttons
-                    text={'PREVIEW'}
-                    type={'LINE'}
-                    onClick={() => {
-                      setModalIsOpen(true);
-                      setModalContent(stacksData[index]);
-                    }}
-                  />
-                  <Buttons
-                    text={'VISIT'}
-                    type={`${!item.url ? `FILL_DISABLED` : `FILL`}`}
-                    onClick={() => item.url && OpenWindow(item.url)}
-                  />
+          {stacksQueryData &&
+            stacksQueryData.map((item, index) => (
+              <div key={item.id} className={style.stack_embla_slide}>
+                <div className={style.image_box}>
+                  <div className={style.project_image}>
+                    <Image
+                      src={item.thumb_image}
+                      alt="thumbImage"
+                      fill
+                    />
+                  </div>
+                  <h1>{item.title}</h1>
+                  <div className={style.project_button}>
+                    <Buttons
+                      text={'PREVIEW'}
+                      type={'LINE'}
+                      type2={''}
+                      onClick={() => {
+                        setModalIsOpen(true);
+                        setModalContent(stacksQueryData[index]);
+                        console.log(
+                          'modalContent',
+                          stacksQueryData[index]
+                        );
+                      }}
+                    />
+                    <Buttons
+                      text={'VISIT'}
+                      type={`${!item.url ? `FILL_DISABLED` : `FILL`}`}
+                      type2={''}
+                      onClick={() => item.url && OpenWindow(item.url)}
+                    />
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
         </div>
       </div>
       <div className={style.stack_embla_controls}>

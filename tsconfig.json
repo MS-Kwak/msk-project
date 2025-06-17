@@ -30,9 +30,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    ".next/types/**/*.ts",
-    "app/(with-slides)/about.jsx",
-    "app/(with-slides)/contact.jsx"
+    ".next/types/**/*.ts"
   ],
   "exclude": ["node_modules"],
   "ts-node": {

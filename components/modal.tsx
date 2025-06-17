@@ -4,9 +4,8 @@ import style from './modal.module.css';
 import Image from 'next/image';
 
 const Modal = ({ modalContent }) => {
-  console.log(modalContent.props);
-  const props = modalContent.props;
-  const chatBodyRef = useRef();
+  // console.log(modalContent);
+  const chatBodyRef = useRef(null);
 
   const onClickScrollDown = () => {
     chatBodyRef.current.scrollTo({
@@ -18,8 +17,8 @@ const Modal = ({ modalContent }) => {
   return (
     <div className={style.Modal}>
       <div className={style.modal_title}>
-        <h1>{props.modalTitle}</h1>
-        <div>{props.modalDescription}</div>
+        <h1>{modalContent.props__modal_title}</h1>
+        <div>{modalContent.props__modal_description}</div>
       </div>
       <div ref={chatBodyRef} className={style.modal_image}>
         <div
@@ -31,7 +30,7 @@ const Modal = ({ modalContent }) => {
         </div>
         <Image
           className={style.image}
-          src={props.modalImage}
+          src={modalContent.props__modal_image}
           alt="image"
           layout="fill"
         />

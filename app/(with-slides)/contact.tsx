@@ -6,6 +6,7 @@ import { useMutation } from '@tanstack/react-query';
 import { Spinner } from '@material-tailwind/react';
 import { queryClient } from '@/config/ReactQueryClientProvider';
 import { createContact } from '@/actions/contact.action';
+import { AlertColor } from '@mui/material';
 
 const Contact = () => {
   const [input, setInput] = useState({
@@ -31,14 +32,23 @@ const Contact = () => {
     },
   });
 
-  const [notification, setNotification] = useState({
+  const [notification, setNotification] = useState<{
+    message: string;
+    severity: AlertColor;
+    open: boolean;
+    showConfirm: boolean;
+  }>({
     message: '',
-    severity: '',
+    severity: 'success',
     open: false,
     showConfirm: false, // 확인 버튼 보여줄지 여부
   });
 
-  const showNotification = (msg, severity, showConfirm = false) => {
+  const showNotification = (
+    msg: string,
+    severity: AlertColor,
+    showConfirm = false
+  ) => {
     setNotification({
       message: msg,
       severity,

@@ -20,7 +20,7 @@
   z-index: 1;
 }
 .MuiAlert-root.MuiAlert-colorSuccess {
-  background-color: rgb(237 253 237 / 70%);
+  background-color: #b0bbb0;
 }
 
 .MuiAlert-action {
