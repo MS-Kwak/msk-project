@@ -24,15 +24,6 @@ const OPTIONS: EmblaOptionsType = {
   align: 'start',
   watchDrag: false,
 };
-type Stacks = {
-  id: number;
-  thumb_image: string;
-  title: string;
-  url: string;
-  props__modal_title: string;
-  props__modal_description: string;
-  props__modal_image: string;
-};
 
 const StackEmblaCarousel = () => {
   const slideIndex = useContext(SlideIndexStateContext);
@@ -48,9 +39,10 @@ const StackEmblaCarousel = () => {
     if (stacksQuery.data) {
       setModalContent(stacksQuery.data);
     }
+    console.log('stacksQuery.data', stacksQuery.data);
   }, [stacksQuery.data]);
 
-  const stacksQueryData = stacksQuery.data as Stacks[];
+  const stacksQueryData = stacksQuery.data;
 
   const [emblaRef, emblaApi] = useEmblaCarousel(OPTIONS);
 

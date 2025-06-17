@@ -1,0 +1,48 @@
+.fileDragDropZone {
+  display: flex;
+  max-width: 600px;
+  margin: 0 auto;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+}
+
+.dropzone {
+  border: 2px dashed #666;
+  padding: 20px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  text-align: center;
+  width: 100%;
+}
+
+.inputArea {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.uploadButton {
+  padding: 10px 40px;
+  background-color: #5fe4b7;
+  color: #222;
+  align-self: flex-end;
+}
+
+.inputArea {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.input {
+  width: 100%;
+  padding: 10px;
+}
+
+.resultMessage {
+  margin-top: 20px;
+  color: #aaa;
+}

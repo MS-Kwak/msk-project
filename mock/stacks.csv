@@ -1,4 +1,4 @@
-﻿"modal_id","thumb_image","title","url","props__modal_title","props__modal_description","props__modal_image"
+﻿"id","thumb_image","title","url","modal_title","modal_description","modal_image"
 "1","/project-chatbot-thumb.png","AI CHATBOT","https://chat.lge.co.kr","LGE.COM Chatbot","AI CHATBOT FRONTEND DEVELOP SM PROJECT","/project-chatbot.png"
 "2","/project-instagram-thumb.png","REALTIME CHAT STIE","https://instagram-supabase-two.vercel.app","Inflearngram Chat website","FULLSTACK SUPABASE DEVELOP PROJECT","/project-instagram.png"
 "3","/project-emotion-diary-thumb.png","PERSONAL STIE","https://emotion-diary-psi-one.vercel.app","Emotion diary website","PERSOMAL WEB FRONTEND DEVELOP PROJECT","/project-emotion-diary.png"

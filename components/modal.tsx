@@ -17,8 +17,8 @@ const Modal = ({ modalContent }) => {
   return (
     <div className={style.Modal}>
       <div className={style.modal_title}>
-        <h1>{modalContent.props__modal_title}</h1>
-        <div>{modalContent.props__modal_description}</div>
+        <h1>{modalContent.modal_title}</h1>
+        <div>{modalContent.modal_description}</div>
       </div>
       <div ref={chatBodyRef} className={style.modal_image}>
         <div
@@ -30,7 +30,7 @@ const Modal = ({ modalContent }) => {
         </div>
         <Image
           className={style.image}
-          src={modalContent.props__modal_image}
+          src={modalContent.modal_image}
           alt="image"
           layout="fill"
         />
