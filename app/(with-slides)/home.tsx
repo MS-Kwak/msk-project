@@ -7,7 +7,7 @@ const Home = () => {
       <div className={style.logo_wrapper}>
         <Image
           className={style.logo}
-          src={'/logo.svg'}
+          src={'/ethan-logo-green.svg'}
           alt="logo"
           priority
           fill
@@ -21,7 +21,7 @@ const Home = () => {
         <br />
         전화: 010.3121.3220 | 사업자등록번호: 759-20-01657
         <br />
-        Copyright © 2025 Ethan's Dev Project
+        Copyright © 2025 Ethan' Dev All rights reserved.
       </div>
     </div>
   );

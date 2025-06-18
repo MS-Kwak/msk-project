@@ -48,7 +48,9 @@ const EmblaCarousel = (props) => {
     if (!autoplay) return;
 
     const resetOrStop =
-      autoplay.options.stopOnInteraction === false ? autoplay.reset : autoplay.stop;
+      autoplay.options.stopOnInteraction === false
+        ? autoplay.reset
+        : autoplay.stop;
 
     resetOrStop();
   }, []);
@@ -58,7 +60,8 @@ const EmblaCarousel = (props) => {
     onNavButtonClick
   );
 
-  const { selectedSnap, snapCount } = useSelectedSnapDisplay(emblaApi);
+  const { selectedSnap, snapCount } =
+    useSelectedSnapDisplay(emblaApi);
 
   return (
     <section className={style.EmblaCarousel}>
@@ -71,7 +74,19 @@ const EmblaCarousel = (props) => {
       </div>
 
       <div className={style.embla__controls_wrapper}>
-        <div className={style.embla__thumbs_viewport} ref={emblaThumbsRef}>
+        <div className={style.embla__controls}>
+          <PrevButton onClick={onPrevButtonClick} />
+          <SelectedSnapDisplay
+            selectedSnap={selectedSnap}
+            snapCount={snapCount}
+          />
+          <NextButton onClick={onNextButtonClick} />
+        </div>
+
+        <div
+          className={style.embla__thumbs_viewport}
+          ref={emblaThumbsRef}
+        >
           <div className={style.embla__thumbs_container}>
             {slides.map((index) => (
               <Thumb
@@ -82,12 +97,6 @@ const EmblaCarousel = (props) => {
               />
             ))}
           </div>
-        </div>
-
-        <div className={style.embla__controls}>
-          <PrevButton onClick={onPrevButtonClick} />
-          <SelectedSnapDisplay selectedSnap={selectedSnap} snapCount={snapCount} />
-          <NextButton onClick={onNextButtonClick} />
         </div>
       </div>
     </section>

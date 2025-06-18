@@ -19,7 +19,7 @@ const About = () => {
         <div id="KR">
           10년 이상의 개발 경력
           <br />
-          프론트엔드 개발 전문
+          프론트엔드 부터 풀스텍까지
         </div>
       </div>
       <div className={style.image_box}>
