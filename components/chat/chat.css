@@ -4,7 +4,7 @@
   opacity: 0;
   pointer-events: none;
   bottom: 90px;
-  right: 35px;
+  right: 5%;
   width: 420px;
   transform: scale(0.2);
   transform-origin: bottom right;
@@ -167,14 +167,15 @@
   flex-shrink: 0;
   border-radius: 50%;
   margin: 0 10px;
+  background: transparent;
 }
 
 .chat-form button svg:hover {
   fill: #4d66da;
 }
 .chat-form button svg {
-  fill: #667eea;
-  width: 30px;
+  fill: #5579ce;
+  width: 26px;
   height: 30px;
 }
 
