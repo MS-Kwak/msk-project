@@ -39,7 +39,7 @@ const StackEmblaCarousel = () => {
     if (stacksQuery.data) {
       setModalContent(stacksQuery.data);
     }
-    console.log('stacksQuery.data', stacksQuery.data);
+    // console.log('stacksQuery.data', stacksQuery.data);
   }, [stacksQuery.data]);
 
   const stacksQueryData = stacksQuery.data;

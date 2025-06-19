@@ -22,7 +22,7 @@
 }
 .embla__controls_wrapper {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   margin: 0 5%;
   margin-bottom: 3%;
@@ -32,17 +32,11 @@
   /* padding: 10px 20px; */
 }
 @media (min-width: 500px) {
-  .embla__controls_wrapper {
-    justify-content: space-between;
-  }
   .embla__thumbs_viewport {
     display: flex;
   }
 }
 @media (min-width: 1200px) {
-  .embla__controls_wrapper {
-    justify-content: space-between;
-  }
   .embla__thumbs_viewport {
     display: flex;
   }

@@ -12,6 +12,7 @@ import {
 import useEmblaCarousel from 'embla-carousel-react';
 import Thumb from './thumb';
 import Slides from './slides';
+import Chat from '../chat/chat';
 
 const EmblaCarousel = (props) => {
   const { slides, options } = props;
@@ -98,6 +99,8 @@ const EmblaCarousel = (props) => {
             ))}
           </div>
         </div>
+
+        <Chat />
       </div>
     </section>
   );

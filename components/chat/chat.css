@@ -1,0 +1,250 @@
+/* 채팅 창 전체 컨테이너 (열기/닫기 애니메이션 포함) */
+.chat-container {
+  position: fixed;
+  opacity: 0;
+  pointer-events: none;
+  bottom: 90px;
+  right: 35px;
+  width: 420px;
+  transform: scale(0.2);
+  transform-origin: bottom right;
+  transition: all 0.1s ease-in-out;
+  overflow: hidden;
+  background: #fff;
+  border-radius: 15px;
+  z-index: 10;
+}
+
+.chat-container.open {
+  opacity: 1;
+  transform: scale(1);
+  pointer-events: auto;
+}
+
+/* 헤더 */
+.chat-header {
+  background: linear-gradient(135deg, #5576cf, #5fe4b6);
+  padding: 15px 20px;
+  color: white;
+  font-weight: bold;
+  text-align: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.chat-header h1 {
+  margin: 0;
+  font-size: 18px;
+}
+.haader-toggle-button {
+  transition: all 0.3s ease-in-out;
+  background: #5bbbbe;
+  border-radius: 100%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.haader-toggle-button svg {
+  width: 24px;
+  height: 24px;
+  fill: #fff;
+}
+.haader-toggle-button:hover {
+  background: #49a5b0;
+}
+
+/* 메시지를 감싸는 영역 (스크롤 가능) */
+.chat-box {
+  flex: 1;
+  padding: 25px 22px;
+  overflow-y: auto;
+  background: #fafafa;
+  height: 460px;
+}
+
+/* 메시지 스타일 */
+.message {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 10px;
+}
+
+.message.user {
+  flex-direction: row-reverse;
+}
+
+.message .text {
+  max-width: 70%;
+  padding: 10px 15px;
+  border-radius: 13px 13px 13px 3px;
+  background-color: #e7ebf4;
+  position: relative;
+  font-size: 14px;
+  line-height: 1.4;
+  word-wrap: break-word;
+  color: #222;
+  box-sizing: content-box;
+}
+
+.message.user .text {
+  background-color: #333;
+  color: white;
+  border-radius: 13px 13px 3px 13px;
+}
+
+/* 아이콘 영역 */
+.bot-icon {
+  margin-right: 10px;
+  font-size: 20px;
+  line-height: 1;
+}
+.bot-icon svg {
+  flex-shrink: 0;
+  align-self: flex-end;
+  margin-bottom: 2px;
+  fill: #fff;
+  background: #5579ce;
+  border-radius: 50%;
+  height: 30px;
+  width: 30px;
+  padding: 4px;
+}
+
+/* 말하는 아이콘 애니메이션 (간단한 오디오 아이콘) */
+.speaking-icon {
+  font-size: 20px;
+  animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
+  }
+}
+
+/* 채팅입력창 스타일 */
+.chat-input {
+  display: flex;
+  padding: 10px;
+  background: #fff;
+}
+.chat-form {
+  display: flex;
+  align-items: center;
+  background: #fff;
+  outline: 1px solid #cccce5;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.06);
+  border-radius: 47px;
+  width: 100%;
+}
+
+.chat-form:focus-within {
+  outline: 2px solid #667eea;
+}
+.chat-form .message-input {
+  border: none;
+  outline: none;
+  width: 100%;
+  background: none;
+  height: 47px;
+  padding: 0 17px;
+  font-size: 0.95rem;
+  border-radius: 50%;
+  color: #000;
+}
+.chat-form button {
+  transition: all 0.3s ease-in-out;
+  height: 30px;
+  width: 30px;
+  display: none;
+  outline: none;
+  flex-shrink: 0;
+  border-radius: 50%;
+  margin: 0 10px;
+}
+
+.chat-form button svg:hover {
+  fill: #4d66da;
+}
+.chat-form button svg {
+  fill: #667eea;
+  width: 30px;
+  height: 30px;
+}
+
+.chat-form .message-input:valid ~ button {
+  display: block;
+}
+
+/* 챗봇 열기/닫기 버튼 (우측 하단) */
+#chatbotToggler {
+  position: relative;
+  border: none;
+  height: 40px;
+  width: 40px;
+  display: flex;
+  cursor: pointer;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #5576cf, #5fe4b6);
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+#chatbotToggler svg {
+  position: absolute;
+  fill: #fff;
+  width: 40%;
+  height: 40%;
+}
+#chatbotToggler svg:last-child {
+  width: 40%;
+  height: 40%;
+}
+
+.container.show-chatbot #chatbotToggler {
+  transform: rotate(90deg);
+}
+#chatbotToggler svg:last-child,
+.container.show-chatbot #chatbotToggler svg:first-child {
+  opacity: 0;
+}
+.container.show-chatbot #chatbotToggler svg:last-child {
+  opacity: 1;
+}
+
+.msg-box {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.msg-box .time {
+  font-size: 12px;
+  color: #999;
+}
+
+/* Responsive media query for mobile css */
+@media (max-width: 520px) {
+  .chat-container {
+    right: 0;
+    bottom: 0;
+    height: 100%;
+    border-radius: 0;
+    width: 100%;
+  }
+  .chat-container .chat-header {
+    padding: 12px 15px;
+  }
+  .chat-box {
+    height: calc(90% - 55px);
+    padding: 25px 15px;
+  }
+  .chat-input {
+    padding: 10px 15px 15px;
+  }
+}

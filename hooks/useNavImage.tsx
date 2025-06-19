@@ -1,8 +1,8 @@
 import HomeIcon from '@mui/icons-material/Home';
 import FaceIcon from '@mui/icons-material/Face';
 import FolderSpecialIcon from '@mui/icons-material/FolderSpecial';
-import TerminalIcon from '@mui/icons-material/Terminal';
-import SmsIcon from '@mui/icons-material/Sms';
+import IntegrationInstructionsIcon from '@mui/icons-material/IntegrationInstructions';
+import RecentActorsIcon from '@mui/icons-material/RecentActors';
 
 const useNavImage = (index) => {
   switch (index) {
@@ -13,9 +13,9 @@ const useNavImage = (index) => {
     case 2:
       return <FolderSpecialIcon />;
     case 3:
-      return <TerminalIcon />;
+      return <IntegrationInstructionsIcon />;
     case 4:
-      return <SmsIcon />;
+      return <RecentActorsIcon />;
     default:
       return null;
   }
