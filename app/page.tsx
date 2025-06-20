@@ -7,7 +7,7 @@ export const metadata = {
   openGraph: {
     title: `Ethan's Dev Lab`,
     description: '이든의 개발 프로젝트에 오신걸 환영합니다',
-    images: ['/thumbnail.png'], // public 폴더에 넣어야 함
+    images: ['/og-thumbnail.png'], // public 폴더에 넣어야 함
   },
 };
 
