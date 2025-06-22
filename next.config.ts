@@ -10,6 +10,11 @@ const nextConfig: NextConfig = {
   images: {
     domains: ['fbohmnjjsfwjbcqjaaad.supabase.co'],
   },
+  experimental: {
+    serverActions: {
+      bodySizeLimit: '10gb', // 여기서 크기를 조정하세요
+    },
+  },
 };
 
 export default nextConfig;
