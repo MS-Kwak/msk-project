@@ -4,7 +4,7 @@ import SmartToyIcon from '@mui/icons-material/SmartToy';
 import SmsIcon from '@mui/icons-material/Sms';
 import CloseIcon from '@mui/icons-material/Close';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import { getChatResponse, getWeather } from '@/actions/chat.action';
+import { getChatResponse } from '@/actions/chat.action';
 import './chat.css';
 
 export default function Chat() {
@@ -112,7 +112,9 @@ export default function Chat() {
               )}
               <div className="msg-box">
                 <div className="text">{msg.text}</div>
-                <div className="time">{msg.time}</div>
+                <div className="time" suppressHydrationWarning>
+                  {msg.time}
+                </div>
               </div>
             </div>
           ))}
