@@ -73,13 +73,13 @@ const Social = () => {
         text={useSocialImage('kakaochannel')}
         type={'WHITE'}
         type2={'KAKAO'}
-        onClick={onClickAddKakaoChannel}
+        onClick={onClickChatChannel}
       />
       <Buttons
         text={useSocialImage('chatchannel')}
         type={'WHITE'}
         type2={'KAKAO'}
-        onClick={onClickChatChannel}
+        onClick={onClickAddKakaoChannel}
       />
     </div>
   );
