@@ -1,0 +1,28 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.description {
+  color: #888;
+  font-size: 14px;
+  margin-bottom: 16px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+.successMessage {
+  margin-top: 16px;
+  color: #4caf50;
+  font-size: 14px;
+}
+
+.errorMessage {
+  margin-top: 16px;
+  color: #f44336;
+  font-size: 14px;
+}

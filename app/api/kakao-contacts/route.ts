@@ -41,7 +41,7 @@ export async function POST(req: NextRequest) {
                 ],
               },
             },
-            { status: 200 }
+            { status: 200 },
           );
         }
 
@@ -82,7 +82,7 @@ export async function POST(req: NextRequest) {
               ],
             },
           },
-          { status: 200 }
+          { status: 200 },
         );
       }
     }
@@ -110,7 +110,7 @@ export async function POST(req: NextRequest) {
               ],
             },
           },
-          { status: 200 }
+          { status: 200 },
         );
       }
 
@@ -124,7 +124,7 @@ export async function POST(req: NextRequest) {
           const similarNames = allNames.filter(
             (name) =>
               name.toLowerCase().includes(searchName.toLowerCase()) ||
-              searchName.toLowerCase().includes(name.toLowerCase())
+              searchName.toLowerCase().includes(name.toLowerCase()),
           );
 
           if (similarNames.length > 0) {
@@ -153,7 +153,7 @@ export async function POST(req: NextRequest) {
                   ],
                 },
               },
-              { status: 200 }
+              { status: 200 },
             );
           } else {
             return NextResponse.json(
@@ -176,7 +176,7 @@ export async function POST(req: NextRequest) {
                   ],
                 },
               },
-              { status: 200 }
+              { status: 200 },
             );
           }
         }
@@ -198,7 +198,7 @@ export async function POST(req: NextRequest) {
                           : ''
                       }`,
                       description: `문의일: ${new Date(
-                        contact.created_at
+                        contact.created_at,
                       ).toLocaleDateString('ko-KR', {
                         year: 'numeric',
                         month: 'long',
@@ -258,7 +258,7 @@ export async function POST(req: NextRequest) {
               ],
             },
           },
-          { status: 200 }
+          { status: 200 },
         );
       }
     }
@@ -284,7 +284,7 @@ export async function POST(req: NextRequest) {
           ],
         },
       },
-      { status: 200 }
+      { status: 200 },
     );
   }
 }

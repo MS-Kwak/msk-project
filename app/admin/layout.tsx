@@ -9,6 +9,7 @@ export default function AdminLayout({ children }) {
         <nav className={style.navLinks}>
           <Link href="/admin">Dashboard</Link>
           <Link href="/admin/upload">Upload Files</Link>
+          <Link href="/admin/documents">RAG Documents</Link>
         </nav>
       </div>
       {children}
