@@ -1,8 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getKakaoRAGAnswer } from './rag-service';
 
-// Edge Runtime: 콜드 스타트 제거 → 카카오 5초 타임아웃 대응
-export const runtime = 'edge';
+// Vercel 함수 최대 실행 시간 (초) - 카카오 5초 제한보다 여유있게
+export const maxDuration = 10;
 
 // 카카오 챗봇 응답 형식 헬퍼
 const kakaoResponse = (text: string) => ({
