@@ -22,7 +22,7 @@ export interface SearchResult {
  */
 export async function searchDocumentsByVector(
   query: string,
-  matchThreshold: number = 0.3,
+  matchThreshold: number = 0.1,
   matchCount: number = 3,
 ): Promise<SearchResult[]> {
   const supabase = createApiAdminClient();
@@ -65,20 +65,44 @@ export async function searchDocumentsByVector(
 }
 
 /**
+ * 폴백: 벡터 검색 결과가 없을 때 전체 문서 직접 조회
+ * (embedding이 아직 없거나 유사도가 너무 낮을 때 대비)
+ */
+async function getAllDocuments(
+  limit: number = 3,
+): Promise<SearchResult[]> {
+  const supabase = createApiAdminClient();
+  const { data, error } = await supabase
+    .from('documents')
+    .select('id, title, content')
+    .limit(limit);
+
+  if (error || !data) {
+    console.error('[Fallback] 전체 문서 조회 실패:', error);
+    return [];
+  }
+
+  console.log('[Fallback] 전체 문서 조회:', data.length, '건');
+  return data.map((doc) => ({ ...doc, similarity: 0 }));
+}
+
+/**
  * 카카오톡용 RAG 답변 생성
- * 1. 벡터 검색으로 관련 문서 검색
+ * 1. 벡터 검색으로 관련 문서 검색 (없으면 전체 문서 폴백)
  * 2. LLM에게 문서 + 질문 전달
  * 3. 간결한 한국어 답변 반환
  */
 export async function getKakaoRAGAnswer(
   question: string,
 ): Promise<string> {
-  // 1. 벡터 유사도 검색
-  const relevantDocs = await searchDocumentsByVector(
-    question,
-    0.3,
-    2,
-  );
+  // 1. 벡터 유사도 검색 (임계값 0.1 - 관대하게)
+  let relevantDocs = await searchDocumentsByVector(question, 0.1, 2);
+
+  // 벡터 검색 결과 없으면 전체 문서 폴백
+  if (relevantDocs.length === 0) {
+    console.log('[RAG] 벡터 검색 결과 없음 → 전체 문서 폴백');
+    relevantDocs = await getAllDocuments(3);
+  }
 
   // 2. 컨텍스트 구성
   const contextText =
