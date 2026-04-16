@@ -1,0 +1,116 @@
+// 카카오 RAG API Route 전용 서비스
+// ⚠️ 'use server' 없음 - API Route(route.ts)에서 직접 import 가능
+// ⚠️ cookies() 없음 - 외부 서비스(카카오) 요청에는 세션 쿠키가 없음
+
+import OpenAI from 'openai';
+import { createApiAdminClient } from '@/utils/supabase/api-admin';
+
+const openai = new OpenAI({
+  apiKey: process.env.NEXT_CHATGPT_OPENAI_API_KEY,
+});
+
+export interface SearchResult {
+  id: number;
+  title: string;
+  content: string;
+  similarity: number;
+}
+
+/**
+ * 벡터 유사도 검색 (진짜 RAG)
+ * Supabase match_documents RPC 사용
+ */
+export async function searchDocumentsByVector(
+  query: string,
+  matchThreshold: number = 0.3,
+  matchCount: number = 3,
+): Promise<SearchResult[]> {
+  const supabase = createApiAdminClient();
+
+  // 1. 질문을 임베딩 벡터로 변환
+  const embeddingRes = await openai.embeddings.create({
+    model: 'text-embedding-3-small',
+    input: query,
+  });
+  const embedding = embeddingRes.data[0].embedding;
+  const embeddingStr = `[${embedding.join(',')}]`;
+
+  // 2. match_documents RPC 호출 (pgvector 유사도 검색)
+  const { data, error } = await supabase.rpc('match_documents', {
+    query_embedding: embeddingStr,
+    match_threshold: matchThreshold,
+    match_count: matchCount,
+  });
+
+  if (error) {
+    console.error('[VectorSearch] RPC Error:', error);
+    return [];
+  }
+
+  console.log('[VectorSearch] Found', data?.length ?? 0, 'documents');
+
+  return (data ?? []).map(
+    (doc: {
+      id: number;
+      title: string;
+      content: string;
+      similarity: number;
+    }) => ({
+      id: doc.id,
+      title: doc.title,
+      content: doc.content,
+      similarity: doc.similarity,
+    }),
+  );
+}
+
+/**
+ * 카카오톡용 RAG 답변 생성
+ * 1. 벡터 검색으로 관련 문서 검색
+ * 2. LLM에게 문서 + 질문 전달
+ * 3. 간결한 한국어 답변 반환
+ */
+export async function getKakaoRAGAnswer(
+  question: string,
+): Promise<string> {
+  // 1. 벡터 유사도 검색
+  const relevantDocs = await searchDocumentsByVector(
+    question,
+    0.3,
+    2,
+  );
+
+  // 2. 컨텍스트 구성
+  const contextText =
+    relevantDocs.length > 0
+      ? relevantDocs
+          .map(
+            (doc, i) =>
+              `[문서 ${i + 1}: ${doc.title}]\n${doc.content}`,
+          )
+          .join('\n\n')
+      : '관련 문서를 찾지 못했습니다.';
+
+  // 3. GPT-4o-mini 호출 (카카오 5초 타임아웃 대응: max_tokens 최소화)
+  const response = await openai.chat.completions.create({
+    model: 'gpt-4o-mini',
+    messages: [
+      {
+        role: 'system',
+        content:
+          '문서 기반으로 간결하게 한국어로 답변하세요. 문서에 없는 내용이면 "해당 정보가 없습니다"라고 답하세요.',
+      },
+      {
+        role: 'user',
+        content: `참고 문서:\n${contextText}\n\n질문: ${question}`,
+      },
+    ],
+    temperature: 0.3,
+    max_tokens: 200,
+  });
+
+  return (
+    response.choices[0]?.message?.content ??
+    '답변을 생성하지 못했습니다.'
+  );
+}

@@ -1,77 +1,48 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getKakaoRAGAnswer } from '@/actions/rag.action';
+import { getKakaoRAGAnswer } from './rag-service';
+
+// 카카오 챗봇 응답 형식 헬퍼
+const kakaoResponse = (text: string) => ({
+  version: '2.0',
+  template: {
+    outputs: [{ simpleText: { text } }],
+    quickReplies: [
+      {
+        messageText: '다른 질문하기',
+        action: 'message',
+        label: '다른 질문하기',
+      },
+    ],
+  },
+});
 
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
+    const userMessage: string = body.userRequest?.utterance ?? '';
 
-    // 카카오 챗봇으로부터 받은 사용자 메시지
-    const userMessage = body.userRequest?.utterance || '';
+    console.log('[kakao-rag] utterance:', userMessage);
 
-    console.log('[RAG] User message:', userMessage);
-
-    // 빈 메시지 처리
     if (!userMessage.trim()) {
       return NextResponse.json(
+        kakaoResponse('질문을 입력해주세요.'),
         {
-          version: '2.0',
-          template: {
-            outputs: [
-              {
-                simpleText: {
-                  text: '질문을 입력해주세요.',
-                },
-              },
-            ],
-          },
+          status: 200,
         },
-        { status: 200 },
       );
     }
 
-    // RAG 기반 답변 생성
     const answer = await getKakaoRAGAnswer(userMessage);
+    console.log('[kakao-rag] answer:', answer);
 
-    console.log('[RAG] Answer:', answer);
-
-    // 카카오톡 응답 형식
-    const response = {
-      version: '2.0',
-      template: {
-        outputs: [
-          {
-            simpleText: {
-              text: answer,
-            },
-          },
-        ],
-        quickReplies: [
-          {
-            messageText: '다른 질문하기',
-            action: 'message',
-            label: '다른 질문하기',
-          },
-        ],
-      },
-    };
-
-    return NextResponse.json(response, { status: 200 });
+    return NextResponse.json(kakaoResponse(answer), { status: 200 });
   } catch (error) {
-    console.error('[RAG] API Error:', error);
+    console.error('[kakao-rag] Error:', error);
 
     return NextResponse.json(
-      {
-        version: '2.0',
-        template: {
-          outputs: [
-            {
-              simpleText: {
-                text: '죄송합니다. 답변을 생성하는 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.',
-              },
-            },
-          ],
-        },
-      },
+      kakaoResponse(
+        '죄송합니다. 답변을 생성하는 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.',
+      ),
       { status: 200 },
     );
   }
