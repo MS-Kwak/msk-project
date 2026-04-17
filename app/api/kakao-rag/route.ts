@@ -19,6 +19,11 @@ const kakaoResponse = (text: string) => ({
   },
 });
 
+// Keep-alive: 외부 서비스(UptimeRobot 등)가 주기적으로 GET 핑 → 콜드 스타트 방지
+export async function GET() {
+  return NextResponse.json({ status: 'ok' }, { status: 200 });
+}
+
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
@@ -26,12 +31,13 @@ export async function POST(req: NextRequest) {
 
     console.log('[kakao-rag] utterance:', userMessage);
 
-    if (!userMessage.trim()) {
+    if (
+      !userMessage.trim() ||
+      userMessage.trim() === '다른 질문하기'
+    ) {
       return NextResponse.json(
-        kakaoResponse('질문을 입력해주세요.'),
-        {
-          status: 200,
-        },
+        kakaoResponse('무엇이 궁금하신가요? 질문을 입력해주세요. 😊'),
+        { status: 200 },
       );
     }
 

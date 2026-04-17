@@ -20,7 +20,7 @@ export interface SearchResult {
  * 벡터 유사도 검색 (pgvector)
  * Supabase match_documents RPC 사용
  */
-export async function searchDocumentsByVector(
+async function searchDocumentsByVector(
   query: string,
   matchThreshold: number = 0.1,
   matchCount: number = 3,
@@ -64,7 +64,7 @@ export async function searchDocumentsByVector(
 }
 
 /**
- * 폴백: 벡터 검색 결과가 없을 때 전체 문서 직접 조회
+ * 폴백: 벡터 검색 결과 없을 때 전체 문서 직접 조회
  */
 async function getAllDocuments(
   limit: number = 5,
@@ -74,6 +74,7 @@ async function getAllDocuments(
   const { data, error } = await supabase
     .from('documents')
     .select('id, title, content')
+    .order('id', { ascending: true })
     .limit(limit);
 
   if (error || !data) {
@@ -94,25 +95,25 @@ async function getAllDocuments(
 export async function getKakaoRAGAnswer(
   question: string,
 ): Promise<string> {
-  // 1. 벡터 유사도 검색 (임계값 0.1 - 관대하게)
-  let relevantDocs = await searchDocumentsByVector(question, 0.1, 3);
+  // 1. 벡터 유사도 검색 (임계값 0.1, 최대 3개)
+  let docs = await searchDocumentsByVector(question, 0.1, 3);
 
   // 결과 없으면 전체 문서 폴백
-  if (relevantDocs.length === 0) {
+  if (docs.length === 0) {
     console.log('[RAG] 벡터 검색 결과 없음 → 전체 문서 폴백');
-    relevantDocs = await getAllDocuments(5);
+    docs = await getAllDocuments(5);
   }
 
-  if (relevantDocs.length === 0) {
+  if (docs.length === 0) {
     return '등록된 문서가 없습니다.';
   }
 
   // 2. 컨텍스트 구성
-  const contextText = relevantDocs
+  const contextText = docs
     .map((doc, i) => `[문서 ${i + 1}: ${doc.title}]\n${doc.content}`)
     .join('\n\n');
 
-  // 3. GPT-4o-mini 호출 (Edge Runtime + max_tokens 제한으로 빠르게)
+  // 3. GPT-4o-mini 호출
   const response = await openai.chat.completions.create({
     model: 'gpt-4o-mini',
     messages: [
@@ -127,7 +128,7 @@ export async function getKakaoRAGAnswer(
       },
     ],
     temperature: 0.3,
-    max_tokens: 300,
+    max_tokens: 200,
   });
 
   return (
