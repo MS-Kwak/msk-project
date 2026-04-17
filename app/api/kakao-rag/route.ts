@@ -1,7 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getKakaoRAGAnswer } from './rag-service';
+import {
+  getKakaoRAGAnswer,
+  getHistory,
+  saveHistory,
+} from './rag-service';
 
-// Vercel 함수 최대 실행 시간 (초) - 카카오 5초 제한보다 여유있게
+// Vercel 함수 최대 실행 시간 (초)
 export const maxDuration = 10;
 
 // 카카오 챗봇 응답 형식 헬퍼
@@ -19,7 +23,7 @@ const kakaoResponse = (text: string) => ({
   },
 });
 
-// Keep-alive: 외부 서비스(UptimeRobot 등)가 주기적으로 GET 핑 → 콜드 스타트 방지
+// Keep-alive: UptimeRobot 등이 주기적으로 GET 핑 → 콜드 스타트 방지
 export async function GET() {
   return NextResponse.json({ status: 'ok' }, { status: 200 });
 }
@@ -28,8 +32,14 @@ export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
     const userMessage: string = body.userRequest?.utterance ?? '';
+    const userId: string = body.userRequest?.user?.id ?? 'anonymous';
 
-    console.log('[kakao-rag] utterance:', userMessage);
+    console.log(
+      '[kakao-rag] userId:',
+      userId,
+      '| utterance:',
+      userMessage,
+    );
 
     if (
       !userMessage.trim() ||
@@ -41,8 +51,15 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const answer = await getKakaoRAGAnswer(userMessage);
+    // 해당 사용자의 이전 대화 히스토리 조회
+    const history = getHistory(userId);
+
+    // RAG 답변 생성
+    const answer = await getKakaoRAGAnswer(userMessage, history);
     console.log('[kakao-rag] answer:', answer);
+
+    // 대화 히스토리 저장
+    saveHistory(userId, userMessage, answer);
 
     return NextResponse.json(kakaoResponse(answer), { status: 200 });
   } catch (error) {
