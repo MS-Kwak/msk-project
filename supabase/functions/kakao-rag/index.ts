@@ -52,9 +52,17 @@ Deno.serve(async (req) => {
     const userMessage: string = body.userRequest?.utterance ?? '';
     const userId: string = body.userRequest?.user?.id ?? 'anonymous';
 
-    console.log('[kakao-rag] userId:', userId, '| utterance:', userMessage);
+    console.log(
+      '[kakao-rag] userId:',
+      userId,
+      '| utterance:',
+      userMessage,
+    );
 
-    if (!userMessage.trim() || userMessage.trim() === '다른 질문하기') {
+    if (
+      !userMessage.trim() ||
+      userMessage.trim() === '다른 질문하기'
+    ) {
       return respond(
         kakaoResponse('무엇이 궁금하신가요? 질문을 입력해주세요. 😊'),
       );
@@ -81,8 +89,8 @@ Deno.serve(async (req) => {
       'match_documents',
       {
         query_embedding: embeddingStr,
-        match_threshold: 0.1,
-        match_count: 3,
+        match_threshold: 0.05,
+        match_count: 7,
       },
     );
 
@@ -93,7 +101,7 @@ Deno.serve(async (req) => {
       const { data: allDocs } = await supabase
         .from('documents')
         .select('id, title, content')
-        .limit(5);
+        .limit(15);
       docs = allDocs ?? [];
     }
 
@@ -117,10 +125,12 @@ Deno.serve(async (req) => {
         content: `당신은 (주)보노보플랫폼의 안내 챗봇입니다. 아래 문서를 참고해서 한국어로 답변하세요.
 
 규칙:
+- 질문에 포함된 연도, 기간, 키워드와 관련된 문서가 있으면 적극적으로 활용하세요. 예를 들어 "2026년 실적"을 물으면 "개발 실적 (2024~2026)" 같은 범위 문서를 참고하세요.
+- 정확히 일치하지 않아도, 관련 있는 문서 내용을 바탕으로 최대한 답변하세요.
 - 목록이나 항목을 묻는 경우, 문서에 있는 모든 항목을 빠짐없이 나열하세요.
 - 숫자나 개수를 묻는 경우, 정확한 수와 함께 항목을 모두 나열하세요.
 - 이전 대화 내역이 있으면 참고해서 맥락에 맞게 답변하세요.
-- 문서에 없는 내용이면 "앗, 해당 내용은 제가 아직 파악하지 못했어요 😅 다른 궁금한 점이 있으시면 편하게 물어봐 주세요! 🙌"라고 답하세요.
+- 문서를 충분히 검토한 후에도 전혀 관련 내용이 없을 때만 "앗, 해당 내용은 제가 아직 파악하지 못했어요 😅 다른 궁금한 점이 있으시면 편하게 물어봐 주세요! 🙌"라고 답하세요.
 - 답변은 간결하되 정보는 완전하게 전달하세요.`,
       },
     ];
@@ -145,7 +155,8 @@ Deno.serve(async (req) => {
     });
 
     const answer =
-      gptRes.choices[0]?.message?.content ?? '답변을 생성하지 못했습니다.';
+      gptRes.choices[0]?.message?.content ??
+      '답변을 생성하지 못했습니다.';
 
     console.log('[RAG] Answer:', answer);
 
