@@ -78,34 +78,43 @@ Deno.serve(async (req) => {
 
     const history = (historyRows ?? []).reverse(); // 오래된 순으로
 
-    // ── 2. 임베딩 생성 + 벡터 검색 ────────────────────────────────────────
+    // ── 2. 전체 문서 조회 + 벡터 검색 병렬 실행 ──────────────────────────
     const embeddingRes = await openai.embeddings.create({
       model: 'text-embedding-3-small',
       input: userMessage,
     });
     const embeddingStr = `[${embeddingRes.data[0].embedding.join(',')}]`;
 
-    const { data: vectorDocs, error: rpcError } = await supabase.rpc(
-      'match_documents',
-      {
+    // 전체 문서 + 벡터 검색 동시에
+    const [allDocsResult, vectorResult] = await Promise.all([
+      supabase
+        .from('documents')
+        .select('id, title, content')
+        .limit(30),
+      supabase.rpc('match_documents', {
         query_embedding: embeddingStr,
         match_threshold: 0.05,
         match_count: 7,
-      },
+      }),
+    ]);
+
+    const allDocs = allDocsResult.data ?? [];
+    const vectorDocs = vectorResult.data ?? [];
+
+    // 벡터 상위 문서를 앞에 두고, 나머지 전체 문서를 뒤에 붙여서 중복 제거
+    const vectorIds = new Set(
+      vectorDocs.map((d: { id: number }) => d.id),
     );
+    const remainingDocs = allDocs.filter((d) => !vectorIds.has(d.id));
+    const docs = [...vectorDocs, ...remainingDocs];
 
-    // 결과 없으면 전체 문서 폴백
-    let docs = vectorDocs ?? [];
-    if (rpcError || docs.length === 0) {
-      console.log('[RAG] 벡터 검색 결과 없음 → 전체 문서 폴백');
-      const { data: allDocs } = await supabase
-        .from('documents')
-        .select('id, title, content')
-        .limit(15);
-      docs = allDocs ?? [];
-    }
-
-    console.log('[RAG] 검색된 문서:', docs.length, '건');
+    console.log(
+      '[RAG] 벡터 상위:',
+      vectorDocs.length,
+      '건 | 전체:',
+      allDocs.length,
+      '건',
+    );
 
     if (docs.length === 0) {
       return respond(kakaoResponse('등록된 문서가 없습니다.'));
